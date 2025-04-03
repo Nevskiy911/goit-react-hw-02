@@ -1,6 +1,6 @@
 import style from "./Feedback.module.css";
 
-const Feedback = ({ feedback, totalFeedback }) => {
+const Feedback = ({ feedback, totalFeedback, positiveFeedback }) => {
   return (
     <div>
       <ul className={style.list}>
@@ -8,12 +8,7 @@ const Feedback = ({ feedback, totalFeedback }) => {
         <li>Neutral: {feedback.neutral}</li>
         <li>Bad: {feedback.bad}</li>
         <li>Total: {totalFeedback}</li>
-        <li>
-          Positive:
-          {totalFeedback > 0
-            ? ((feedback.good / totalFeedback) * 100).toFixed(1) + "%"
-            : "0%"}
-        </li>
+        <li>Positive: {positiveFeedback}%</li>
       </ul>
     </div>
   );

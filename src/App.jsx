@@ -3,6 +3,7 @@ import Description from "./components/Description/Description";
 import Options from "./components/Options/Options";
 import Feedback from "./components/Feedback/Feedback";
 import { useState, useEffect } from "react";
+import Notification from "./components/Notification/Notification";
 
 function App() {
   const [feedback, setFeedback] = useState(() => {
@@ -30,6 +31,11 @@ function App() {
 
   const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
 
+  const positiveFeedback =
+    totalFeedback > 0
+      ? ((feedback.good / totalFeedback) * 100).toFixed(1)
+      : "0.0";
+
   return (
     <>
       <Description />
@@ -38,8 +44,14 @@ function App() {
         resetFeedback={resetFeedback}
         totalFeedback={totalFeedback}
       />
-      {totalFeedback > 0 && (
-        <Feedback feedback={feedback} totalFeedback={totalFeedback} />
+      {totalFeedback > 0 ? (
+        <Feedback
+          feedback={feedback}
+          totalFeedback={totalFeedback}
+          positiveFeedback={positiveFeedback}
+        />
+      ) : (
+        <Notification />
       )}
     </>
   );
